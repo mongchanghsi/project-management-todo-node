@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const MongoClient = require('mongodb').MongoClient;
 const app = express();
 const folder = require('./routes/folders');
 const cors = require('cors');
@@ -9,7 +10,10 @@ if (!config.get('db')){
     console.error('config in db is not defined');
     process.exit(1);
 }
-mongoose.connect(config.get('db'))
+
+const client = new MongoClient(config.get('db'), { useNewUrlParser: true });
+
+mongoose.connect(config.get(client))
     .then(() => console.log('Connected to Mongodb...'))
     .catch((error) => console.error('Error connecting to Mongodb...', error.message))
 
