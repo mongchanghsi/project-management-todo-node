@@ -13,7 +13,7 @@ if (!config.get('db')){
 
 const client = new MongoClient(config.get('db'), { useNewUrlParser: true });
 
-mongoose.connect(config.get(client))
+mongoose.connect(client)
     .then(() => console.log('Connected to Mongodb...'))
     .catch((error) => console.error('Error connecting to Mongodb...', error.message))
 
